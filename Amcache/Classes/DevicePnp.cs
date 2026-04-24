@@ -9,7 +9,8 @@ public class DevicePnp
         string driverName, string driverPackageStrongName, string driverVerDate, string driverVerVersion,
         string enumerator, string hwid, string inf,
         string installState, string manufacturer, string matchingId, string model, string parentId,
-        string problemCode, string provider, string service, string stackId)
+        string problemCode, string provider, string service, string stackId, string installDate,
+        string firstInstallDate)
     {
         BusReportedDescription = busReportedDesc;
         Class = clss;
@@ -35,6 +36,8 @@ public class DevicePnp
         Provider = provider;
         Service = service;
         Stackid = stackId;
+        InstallDate = installDate;
+        FirstInstallDate = firstInstallDate;
 
         KeyName = keyName;
         KeyLastWriteTimestamp = keyLastWriteTimestamp;
@@ -67,4 +70,6 @@ public class DevicePnp
     public string Provider { get; }
     public string Service { get; }
     public string Stackid { get; }
+    public string InstallDate { get; }
+    public string FirstInstallDate { get; }
 }

@@ -429,6 +429,8 @@ internal class Program
                         foo.Map(m => m.StoreAppType).Index(20);
 
                         foo.Map(m => m.UninstallString).Index(21);
+                        foo.Map(m => m.UserSid).Index(22);
+                        foo.Map(m => m.MsiInstallDate).Index(23);
 
                         csvWriter.Context.RegisterClassMap(foo);
                             
@@ -658,6 +660,7 @@ internal class Program
                     foo.Map(m => m.ModelNumber).Index(14);
                     foo.Map(m => m.PrimaryCategory).Index(15);
                     foo.Map(m => m.State).Index(16);
+                    foo.Map(m => m.Model).Index(17);
 
                     csvWriter.Context.RegisterClassMap(foo);
                         
@@ -777,6 +780,8 @@ internal class Program
                     foo.Map(m => m.Provider).Index(22);
                     foo.Map(m => m.Service).Index(23);
                     foo.Map(m => m.Stackid).Index(24);
+                    foo.Map(m => m.InstallDate).Index(25);
+                    foo.Map(m => m.FirstInstallDate).Index(26);
                     foo.Map(m => m.DeviceState).Ignore();
 
                     csvWriter.Context.RegisterClassMap(foo);

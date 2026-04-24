@@ -10,7 +10,8 @@ public class ProgramsEntryNew
         string msiProductCode, string name, string osVersionAtInstallTime, string packageFullName, string programId,
         string programInstanceId, string publisher, string registryKeyPath, string rootDirPath, string source,
         string storeAppType, string type, string uninstallString, string version, DateTimeOffset lastwrite,
-        string installDateArpLastModified, DateTimeOffset? installDateMsi, string installDateFromLinkFile, string manufacturer)
+        string installDateArpLastModified, DateTimeOffset? installDateMsi, string installDateFromLinkFile,
+        string manufacturer, string userSid, string msiInstallDate)
     {
         FileEntries = new List<FileEntryNew>();
 
@@ -41,6 +42,8 @@ public class ProgramsEntryNew
         InstallDateMsi = installDateMsi;
         InstallDateFromLinkFile = installDateFromLinkFile;
         Manufacturer = manufacturer;
+        UserSid = userSid;
+        MsiInstallDate = msiInstallDate;
     }
 
     public string BundleManifestPath { get; }
@@ -70,6 +73,8 @@ public class ProgramsEntryNew
     public string UninstallString { get; }
     public string Version { get; }
     public string Manufacturer { get; }
+    public string UserSid { get; }
+    public string MsiInstallDate { get; }
 
     public DateTimeOffset KeyLastWriteTimestamp { get; }
     public List<FileEntryNew> FileEntries { get; }
