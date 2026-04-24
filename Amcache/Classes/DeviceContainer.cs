@@ -7,7 +7,7 @@ public class DeviceContainer
     public DeviceContainer(string keyName, DateTimeOffset keyLastWrite, string categories, string discoveryMethod,
         string friendlyName, string icon, bool isActive, bool isConnected, bool isMachineContainer,
         bool isNetworked, bool isPaired, string manufacturer, string modelId, string modelName, string modelNumber,
-        string primaryCategory, string state)
+        string primaryCategory, string state, string model)
     {
         KeyName = keyName;
         KeyLastWriteTimestamp = keyLastWrite;
@@ -26,6 +26,7 @@ public class DeviceContainer
         ModelName = modelName;
         PrimaryCategory = primaryCategory;
         State = state;
+        Model = model;
     }
 
     public string KeyName { get; }
@@ -46,4 +47,5 @@ public class DeviceContainer
     public string ModelNumber { get; }
     public string PrimaryCategory { get; }
     public string State { get; }
+    public string Model { get; }
 }

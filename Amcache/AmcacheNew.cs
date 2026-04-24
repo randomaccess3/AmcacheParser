@@ -162,6 +162,8 @@ public class AmcacheNew
                 var installDateFromLinkFile = string.Empty;
                 var manufacturer = string.Empty;
                 var driverVerVersion = string.Empty;
+                var userSid = string.Empty;
+                var msiInstallDate = string.Empty;
 
 
                 try
@@ -276,6 +278,12 @@ public class AmcacheNew
                                 }
 
                                 break;
+                            case "UserSid":
+                                userSid = registryKeyValue.ValueData;
+                                break;
+                            case "MsiInstallDate":
+                                msiInstallDate = registryKeyValue.ValueData;
+                                break;
                             case "DriverVerVersion":
                             case "BusReportedDescription":
                             case "HWID":
@@ -290,8 +298,6 @@ public class AmcacheNew
                             case "Provider":
                             case "Inf":
                             case "(default)":
-                            case "MsiInstallDate":
-                            case "UserSid":
                                 Log.Debug("Non-tracked data when processing InventoryApplication at path {KeyPath}: {ValueName}==>{ValueData}",registryKey.KeyPath,registryKeyValue.ValueName,registryKeyValue.ValueData);
                                     
                                 break;
@@ -315,7 +321,7 @@ public class AmcacheNew
                         manifestPath, msiPackageCode, msiProductCode, name, osVersionAtInstallTime, packageFullName,
                         programId, programInstanceId, publisher, registryKeyPath, rootDirPath, source, storeAppType,
                         type, uninstallString, version, registryKey.LastWriteTime.Value, installDateArpLastModified,
-                        installDateMsi, installDateFromLinkFile, manufacturer);
+                        installDateMsi, installDateFromLinkFile, manufacturer, userSid, msiInstallDate);
 
                     ProgramsEntries.Add(pe);
                 }
@@ -361,6 +367,7 @@ public class AmcacheNew
                 ulong usn = 0;
                 var version = string.Empty;
                 var description = string.Empty;
+                var originalFileName = string.Empty;
 
                 var hasLinkedProgram = false;
 
@@ -471,12 +478,13 @@ public class AmcacheNew
                             case "Inf":
                             case "LowerFilters":
                             case "ProblemCode":
-                            case "OriginalFileName":
-
                             case "Provider":
                             case "Class":
                                 Log.Debug(
                                     "Non-tracked data when processing FileEntry at path {KeyPath}: {ValueName}==>{ValueData}",subKey.KeyPath,subKeyValue.ValueName,subKeyValue.ValueData);
+                                break;
+                            case "OriginalFileName":
+                                originalFileName = subKeyValue.ValueData;
                                 break;
                             case "Description":
                                 description = subKeyValue.ValueData;
@@ -515,7 +523,7 @@ public class AmcacheNew
                     isPeFile,
                     language, linkDate, longPathHash, lowerCaseLongPath, name, productName, productVersion,
                     programId,
-                    publisher, size, version, subKey.LastWriteTime.Value, binProductVersion, usn, description);
+                    publisher, size, version, subKey.LastWriteTime.Value, binProductVersion, usn, description, originalFileName);
 
                 if (hasLinkedProgram)
                 {
@@ -580,6 +588,7 @@ public class AmcacheNew
                 var modelNumber = string.Empty;
                 var primaryCategory = string.Empty;
                 var state = string.Empty;
+                var model = string.Empty;
 
                 try
                 {
@@ -632,8 +641,10 @@ public class AmcacheNew
                             case "State":
                                 state = keyValue.ValueData;
                                 break;
-                            case "(default)":
                             case "Model":
+                                model = keyValue.ValueData;
+                                break;
+                            case "(default)":
                             case "BusReportedDescription":
                             case "Version":
                             case "LowerClassFilters":
@@ -650,7 +661,7 @@ public class AmcacheNew
 
                     var dc = new DeviceContainer(deviceSubKey.KeyName, deviceSubKey.LastWriteTime.Value, categories,
                         discoveryMethod, friendlyName, icon, isActive, isConnected, isMachineContainer, isNetworked,
-                        isPaired, manufacturer, modelId, modelName, modelNumber, primaryCategory, state);
+                        isPaired, manufacturer, modelId, modelName, modelNumber, primaryCategory, state, model);
 
                     DeviceContainers.Add(dc);
                 }
@@ -698,6 +709,8 @@ public class AmcacheNew
                 var provider = string.Empty;
                 var service = string.Empty;
                 var stackid = string.Empty;
+                var installDate = string.Empty;
+                var firstInstallDate = string.Empty;
 
                 try
                 {
@@ -780,14 +793,18 @@ public class AmcacheNew
                             case "STACKID":
                                 stackid = keyValue.ValueData;
                                 break;
+                            case "InstallDate":
+                                installDate = keyValue.ValueData;
+                                break;
+                            case "FirstInstallDate":
+                                firstInstallDate = keyValue.ValueData;
+                                break;
                             case "UpperClassFilters":
                             case "UpperFilters":
                             case "ExtendedInfs":
                             case "DeviceInterfaceClasses":
                             case "(default)":
                             case "DeviceExtDriversFlightIds":
-                            case "InstallDate":
-                            case "FirstInstallDate":
                             case "DeviceDriverFlightId":
                                 Log.Debug("Non-tracked data when processing DevicePnp at path {KeyPath}: {ValueName}==>{ValueData}",pnpsKey.KeyPath,keyValue.ValueName,keyValue.ValueData);
                                 break;
@@ -801,7 +818,7 @@ public class AmcacheNew
                         Class, classGuid, compid, containerId, description, deviceState, driverId, driverName,
                         driverPackageStrongName, driverVerDate, driverVerVersion, enumerator, hwid, inf,
                         installState, manufacturer, matchingId, model, parentId, problemCode, provider, service,
-                        stackid);
+                        stackid, installDate, firstInstallDate);
 
                     DevicePnps.Add(dp);
                 }
