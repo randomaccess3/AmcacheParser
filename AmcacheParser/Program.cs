@@ -354,6 +354,7 @@ internal class Program
                         
 
                     foo.Map(m => m.Language).Index(18);
+                    foo.Map(m => m.OriginalFileName).Index(19);
                     foo.Map(m => m.Publisher).Ignore();
 
                     csvWriter.Context.RegisterClassMap(foo);
@@ -488,6 +489,7 @@ internal class Program
                         foo.Map(m => m.BinProductVersion).Index(17);
 
                         foo.Map(m => m.Language).Index(18);
+                        foo.Map(m => m.OriginalFileName).Index(19);
                         foo.Map(m => m.Publisher).Ignore();
 
                         csvWriter.Context.RegisterClassMap(foo);
